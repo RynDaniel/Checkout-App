@@ -15,14 +15,52 @@ const productList = document.querySelector("div.main__product-painel");
 
 //capturing
 navbarList.addEventListener("click", (e) => {
-    if (e.target.getAttribute("class") == "nav__list--btn") {
+    if (e.target.getAttribute("class") == "nav__list--btn" || "fa-regular fa-trash-can") {
         //e.target.parentElement.firstElementChild.innerText = "My Cart";
         //e.target.previousElementSibling.innerText = "My Cart";
         //e.target vs. e.currentTarget
         //foreach ==> array, nodeList
-        productList.innerHTML = "No Product!"
+        productList.innerText = "No Product!";
         e.currentTarget.firstElementChild.innerText = "My Cart";
+        calculateCartPrice();
     }
-    else{}
 });
+
+productList.addEventListener("click", (e)=>{
+    //minus
+    if(e.target.className == "fa-solid fa-minus"){
+        if(e.target.nextElementSibling.innerText > 1){
+            e.target.nextElementSibling.innerText --;
+        }
+        else{
+            if(confirm(`${e.target.closest(".main__product-info").querySelector("h2").innerText} will be removed!`)){
+                e.target.closest(".main__product").remove();                
+            }
+        }
+        calculateProductPrice();
+    }
+    //plus
+    else if(e.target.classList.contains("fa-plus")){
+        e.target.previousElementSibling.innerText ++;
+        calculateProductPrice();
+    }
+    //remove
+    else if(e.target.id == "remove-product"){
+        if(confirm(`${e.target.closest(".main__product-info").querySelector("h2").innerText} will be removed!`)){
+            e.target.closest(".main__product").remove();                
+        }
+    }
+    else{
+        alert("other element clicked");
+    }
+    calculateCartPrice();
+});
+
+const calculateProductPrice = () =>{
+    //product line calculations
+}
+
+const calculateCartPrice = () =>{
+    //cart total calculations
+}
 
