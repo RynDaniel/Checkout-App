@@ -26,23 +26,24 @@ navbarList.addEventListener("click", (e) => {
     }
 });
 
+//capturing
 productList.addEventListener("click", (e)=>{
     //minus
     if(e.target.className == "fa-solid fa-minus"){
         if(e.target.nextElementSibling.innerText > 1){
             e.target.nextElementSibling.innerText --;
+            calculateProductPrice(e.target);
         }
         else{
             if(confirm(`${e.target.closest(".main__product-info").querySelector("h2").innerText} will be removed!`)){
                 e.target.closest(".main__product").remove();                
             }
         }
-        calculateProductPrice();
     }
     //plus
     else if(e.target.classList.contains("fa-plus")){
         e.target.previousElementSibling.innerText ++;
-        calculateProductPrice();
+        calculateProductPrice(e.target);
     }
     //remove
     else if(e.target.id == "remove-product"){
@@ -56,8 +57,9 @@ productList.addEventListener("click", (e)=>{
     calculateCartPrice();
 });
 
-const calculateProductPrice = () =>{
+const calculateProductPrice = (target) =>{
     //product line calculations
+    target.closest(".");
 }
 
 const calculateCartPrice = () =>{
